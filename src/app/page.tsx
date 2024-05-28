@@ -10,6 +10,8 @@ interface Product {
   id: number;
   title: string;
   price: number;
+  images:string;
+  
 }
 
 async function Home() {
@@ -17,18 +19,23 @@ async function Home() {
   console.log(data);
   
   return (
-    <div className="grid lg:grid-cols-2 sm:grid-cols-1 mt-10 lg:mx-36">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-10 lg:mx-36">
       {data.products.map((product: Product) => (
-        <div className="card  border sm:w-[100px] lg:w-[500px] rounded-lg  mb-5" key={product.id}>
-         <div className="card-body">
-         <h2 className="text-xl"> Title: <span>{product.title}</span></h2>
-          <p className="text-xl"> Price: <span> {product.price}$</span></p>
-         </div>
-         <div className="card-actions">
-         <Link className="link link-hover font-medium pb-4 ml-8" href={`/product/${product.id}`}>read more</Link>
 
-         </div>
-        </div>
+<div className="card h-[400px] mb-5 w-80 bg-base-100 shadow-xl">
+<figure><img className=":md-h-auto w-full object-cover " width="400px" height="300px" src={product.images[0]} alt="Shoes" /></figure>
+<div className="card-body">
+  <h2 className="card-title">{product.title}</h2>
+  <p>{product.price}$</p>
+
+  <div className="card-actions justify-end">
+    <button className="btn btn-primary">
+     <Link  href={`/product/${product.id}`}>read more</Link>
+
+    </button>
+  </div>
+</div>
+</div>
       ))}
     </div>
   );
